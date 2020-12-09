@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
@@ -12,12 +12,13 @@ import {
 import { ReactComponent as Logo } from './../../assets/crown.svg';
 import { auth } from '../../firebase/utils';
 import { selectCartHidden } from './../../redux/cart/selectors';
-import { selectCurrentUser } from './../../redux/user/selectors';
+import CurrentUserContext from './../../contexts/currentUser/currentUser.context';
 
 import CartIcon from './../CartIcon';
 import CartDropdown from './../CartDropdown';
 
-function Header({ currentUser, hidden }) {
+function Header({ hidden }) {
+  const currentUser = useContext(CurrentUserContext);
   return (
     <HeaderContainer>
       <LogoContainer to='/'>
@@ -41,7 +42,6 @@ function Header({ currentUser, hidden }) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
   hidden: selectCartHidden,
 });
 
