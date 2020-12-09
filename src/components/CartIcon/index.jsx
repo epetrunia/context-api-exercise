@@ -9,7 +9,7 @@ import {
 } from './CartIcon.style';
 
 import { selectCartItemsCount } from './../../redux/cart/selectors';
-import CartContext from './../../contexts/cart/cart.context';
+import { CartContext } from './../../providers/cart/cart.provider';
 
 function CartIcon({ itemCount }) {
   const { toggleHidden } = useContext(CartContext);

@@ -10,15 +10,14 @@ import {
 import { ReactComponent as Logo } from './../../assets/crown.svg';
 import { auth } from '../../firebase/utils';
 import CurrentUserContext from './../../contexts/currentUser/currentUser.context';
-import CartContext from './../../contexts/cart/cart.context';
+import { CartContext } from './../../providers/cart/cart.provider';
 
 import CartIcon from './../CartIcon';
 import CartDropdown from './../CartDropdown';
 
 function Header() {
-  const [hidden, setHidden] = useState(true);
-  const toggleHidden = () => setHidden(!hidden);
   const currentUser = useContext(CurrentUserContext);
+  const { hidden } = useContext(CartContext);
   return (
     <HeaderContainer>
       <LogoContainer to='/'>
@@ -34,14 +33,7 @@ function Header() {
         ) : (
           <OptionLink to='/signin'>sign in</OptionLink>
         )}
-        <CartContext.Provider
-          value={{
-            hidden,
-            toggleHidden,
-          }}
-        >
-          <CartIcon />
-        </CartContext.Provider>
+        <CartIcon />
       </LinksContainer>
       {hidden ? null : <CartDropdown />}
     </HeaderContainer>

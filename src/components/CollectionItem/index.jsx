@@ -1,5 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { useContext } from 'react';
 
 import {
   CollectionItemContainer,
@@ -10,10 +9,11 @@ import {
   AddButton,
 } from './CollectionItem.style';
 
-import { addItem } from '../../redux/cart/actions';
+import { CartContext } from './../../providers/cart/cart.provider';
 
-function CollectionItem({ item, addItem }) {
+function CollectionItem({ item }) {
   const { name, price, imageUrl } = item;
+  const { addItem } = useContext(CartContext);
   return (
     <CollectionItemContainer>
       <BackgroundWrapper
@@ -31,8 +31,4 @@ function CollectionItem({ item, addItem }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  addItem: (item) => dispatch(addItem(item)),
-});
-
-export default connect(null, mapDispatchToProps)(CollectionItem);
+export default CollectionItem;
