@@ -8,13 +8,12 @@ import {
   EmptyCartMessage,
 } from './CartDropdown.style';
 
-import { toggleCartHidden } from './../../redux/cart/actions';
 import { CartContext } from './../../providers/cart/cart.provider';
 
 import CartItem from './../CartItem';
 
-function CartDropdown({ history, dispatch }) {
-  const { cartItems } = useContext(CartContext);
+function CartDropdown({ history }) {
+  const { cartItems, toggleHidden } = useContext(CartContext);
   return (
     <CartDropdownContainer>
       <CartItemsContainer>
@@ -27,7 +26,7 @@ function CartDropdown({ history, dispatch }) {
       <DropdownButton
         onClick={() => {
           history.push('/checkout');
-          dispatch(toggleCartHidden());
+          toggleHidden();
         }}
       >
         go to checkout
